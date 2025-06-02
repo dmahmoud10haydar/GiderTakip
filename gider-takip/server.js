@@ -15,3 +15,8 @@ mongoose
   .connect('mongodb+srv://dmahmoud10haydar:pCmIUhpmgMqEQL14@cluster0.0x96cqp.mongodb.net/giderTakipDB')
   .then(() => console.log('MongoDB Atlas bağlantısı başarılı'))
   .catch((err) => console.error('MongoDB bağlantı hatası:', err));
+
+  
+const userRoutes = require('./routes/userRoutes');
+app.use('/users', userRoutes);
+
