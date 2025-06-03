@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+
 
 //GET
 router.get("/", async (req, res) => {
@@ -25,3 +25,25 @@ router.get("/", async (req, res) => {
   }
 });
 
+// PUT
+router.put('/:id', async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true } 
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "Kullanıcı bulunamadı" });
+    }
+
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+
+
+module.exports = router;
