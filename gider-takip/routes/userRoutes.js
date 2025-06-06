@@ -44,6 +44,17 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-
+// DELETE
+router.delete('/:id', async (req, res) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    if (!deletedUser) {
+      return res.status(404).json({ message: "Kullanıcı bulunamadı" });
+    }
+    res.json({ message: "Kullanıcı başarıyla silindi", user: deletedUser });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 module.exports = router;
